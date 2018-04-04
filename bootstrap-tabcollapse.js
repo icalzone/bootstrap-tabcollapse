@@ -152,7 +152,8 @@
         $heading.attr({
             'data-toggle': 'tab',
             'href': href,
-            'data-parent': ''
+            'data-parent': '',
+            'data-target': $heading.data('target').replace(/-collapse$/g, '')
         });
         return $heading;
     };
@@ -162,7 +163,8 @@
         $heading.attr({
             'data-toggle': 'collapse',
             'data-parent': '#' + parentId,
-            'href': '#' + groupId
+            'href': '#' + groupId,
+            'data-target': $heading.data('target')+'-collapse'
         });
         return $heading;
     };
