@@ -57,6 +57,7 @@
 
         var $panelHeadings = this.$accordion.find('.js-tabcollapse-panel-heading').detach();
 
+        var selectedHref = '';
         $panelHeadings.each(function() {
             var $panelHeading = $(this),
             $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
@@ -70,6 +71,7 @@
 
             if (!$oldHeading.hasClass('collapsed')) {
                 $parentLi.addClass('active');
+                selectedHref = $panelHeading.attr('href').replace('#', '');
                 if ($parentLi.parent().hasClass('dropdown-menu')) {
                     $parentLi.parent().parent().addClass('active');
                 }
@@ -88,6 +90,13 @@
         $panelBodies.each(function(){
             var $panelBody = $(this),
                 $tabPane = $panelBody.data('bs.tabcollapse.tabpane');
+
+                if ($tabPane.attr('id') === selectedHref) {
+                                    $tabPane.addClass('active').addClass('in');
+                                } else {
+                                    $tabPane.removeClass('active').removeClass('in');
+                                }
+
             $tabPane.append($panelBody.contents().detach());
         });
         this.$accordion.html('');
